@@ -3,6 +3,7 @@ package com.mygdx.game.states;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.HelicopterGame;
 
 public class MenuState extends State {
     private Texture background;
@@ -28,9 +29,8 @@ public class MenuState extends State {
     @Override
     public void render(SpriteBatch sb) {
         sb.begin();
-        sb.draw(background, 0, 0, 480, 800);
+        sb.draw(background, 0, 0, HelicopterGame.WIDTH, HelicopterGame.HEIGHT);
         sb.end();
-
     }
 
     @Override

@@ -7,11 +7,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.states.GameStateManager;
 import com.mygdx.game.states.MenuState;
 
-public class MyGdxGame extends ApplicationAdapter {
+public class HelicopterGame extends ApplicationAdapter {
+
     public static final int WIDTH = 480;
     public static final int HEIGHT = 800;
-
     public static final String TITLE = "Helicopter";
+
     private GameStateManager gsm;
 	private SpriteBatch batch;
 
