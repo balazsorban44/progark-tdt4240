@@ -8,26 +8,18 @@ import com.mygdx.game.HelicopterGame
 import com.mygdx.game.sprites.Helicopter
 
 class PlayState(gsm: GameStateManager) : State(gsm) {
-    private val helicopter: Helicopter
-    private val bg: Texture
-    internal var font = BitmapFont()
+    private val helicopter: Helicopter = Helicopter(50f, 300f)
+    private val bg: Texture = Texture("background.png")
+    private var font = BitmapFont()
 
-
-    init {
-        helicopter = Helicopter(50f, 300f)
-        bg = Texture("background.png")
-    }
 
     override fun handleInput() {
-        if (Gdx.input.justTouched())
-            helicopter.jump()
-
+        if (Gdx.input.justTouched()) helicopter.jump()
     }
 
     override fun update(dt: Float) {
         handleInput()
         helicopter.update(dt)
-
     }
 
     override fun render(sb: SpriteBatch) {
@@ -38,7 +30,5 @@ class PlayState(gsm: GameStateManager) : State(gsm) {
         sb.end()
     }
 
-    override fun dispose() {
-
-    }
+    override fun dispose() {}
 }

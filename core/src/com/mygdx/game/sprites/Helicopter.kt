@@ -7,16 +7,14 @@ import com.mygdx.game.HelicopterGame
 
 class Helicopter(x: Float, y: Float) {
 
-    val position: Vector2 = Vector2(x, y)
-    private val velocity: Vector2
+    val texture = Sprite(Texture("heli1.png"))
+    val position = Vector2(x, y)
 
-    val texture: Sprite
-    private val speed: Float = 2f
+    private val velocity: Vector2
+    private val speed = 2f
 
     init {
         velocity = Vector2(randomWithRange(-200, 220).toFloat(), randomWithRange(-200, 200).toFloat())
-        texture = Sprite(Texture("heli1.png"))
-
         if (velocity.x > 0) flipSpriteOnX() // Helicopter starts in the correct direction
     }
 
