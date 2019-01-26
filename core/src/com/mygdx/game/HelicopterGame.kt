@@ -28,8 +28,8 @@ class HelicopterGame : ApplicationAdapter() {
 
 
     companion object {
-        const val WIDTH = 480
-        const val HEIGHT = 800
+        const val WIDTH = 800
+        const val HEIGHT = 480
         const val TITLE = "Helicopter"
     }
 }
