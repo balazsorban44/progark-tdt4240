@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
+import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.HelicopterGame
 import com.mygdx.game.sprites.Helicopter
 
@@ -14,7 +15,7 @@ class PlayState(gsm: GameStateManager) : State(gsm) {
 
 
     override fun handleInput() {
-        if (Gdx.input.justTouched()) helicopter.jump()
+        if (Gdx.input.isTouched) helicopter.move(Vector2(Gdx.input.getX().toFloat(), Gdx.input.getY().toFloat()))
     }
 
     override fun update(dt: Float) {

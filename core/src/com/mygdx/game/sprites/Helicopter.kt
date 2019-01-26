@@ -10,6 +10,7 @@ class Helicopter(x: Float, y: Float) {
     val texture = Sprite(Texture("heli1.png"))
     val position = Vector2(x, y)
 
+
     private val velocity: Vector2
     private val speed = 2f
 
@@ -27,42 +28,47 @@ class Helicopter(x: Float, y: Float) {
 
     fun update(dt: Float) {
         val maxHeight = HelicopterGame.HEIGHT - texture.height
-        val maxWidth= HelicopterGame.WIDTH - texture.width
-
-        if (position.y > 0)
-            //Kommenter inn for gravity
-            //velocity.add(0, GRAVITY, 0);
+        val maxWidth = HelicopterGame.WIDTH - texture.width
 
         velocity.scl(dt)
-        position.add(velocity.x, velocity.y)
 
 
         // Reached top
-        if (position.y > maxHeight) velocity.add(0f, velocity.y * -speed)
+        if (position.y > maxHeight) {
+            position.y = maxHeight
+            velocity.add(0f, velocity.y * -speed)
+        }
 
-        if (position.y > maxHeight) position.y = maxHeight // Ensures that helicopter don't fly above the window
 
         // Reached bottom
-        // REVIEW: Why not 0?
-        if (position.y < 10) velocity.add(0f, velocity.y * -speed)
+        if (position.y < 0) {
+            position.y = 0f
+            velocity.add(0f, velocity.y * -speed)
+        }
 
 
         // Reached right
         if (position.x > maxWidth) {
+            position.x = maxWidth
             velocity.add(velocity.x * -speed, 0f)
             flipSpriteOnX()
         }
 
         // Reached left
         if (position.x < 0) {
+            position.x = 0f
             velocity.add(velocity.x * -speed, 0f)
             flipSpriteOnX()
         }
 
-        velocity.scl(1 / dt)
+        //position.add(velocity.x, velocity.y)
+        velocity.scl(1/dt)
     }
 
-    fun jump() {velocity.y = 250f}
+    fun move(origin: Vector2) {
+        position.x = origin.x - texture.width / 2
+        position.y = HelicopterGame.HEIGHT - origin.y - texture.height / 2
+    }
 
     fun getPosition(): String {
         return """
@@ -71,5 +77,4 @@ class Helicopter(x: Float, y: Float) {
               """.trimMargin()
     }
 
-    companion object {private val GRAVITY = -15 }
 }
