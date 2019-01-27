@@ -14,9 +14,10 @@ class PlayState(gsm: GameStateManager) : State(gsm) {
     private val helicopter3: Helicopter = Helicopter(200f, 40f)
     private val bg: Texture = Texture("background.png")
     private var font = BitmapFont()
+    private var elapsedTime = 0f
 
     override fun handleInput() {
-        if (Gdx.input.isTouched()) {
+        if (Gdx.input.isTouched) {
             val touch = Vector2(Gdx.input.x.toFloat(), HelicopterGame.HEIGHT - Gdx.input.y.toFloat())
             helicopter.control(touch)
             helicopter2.control(touch)
@@ -35,12 +36,26 @@ class PlayState(gsm: GameStateManager) : State(gsm) {
         helicopter3.update(dt, listOf(helicopter, helicopter2))
     }
 
-    override fun render(sb: SpriteBatch) {
+
+    override fun render(sb: SpriteBatch, dt: Float) {
+        elapsedTime += dt
         sb.begin()
         sb.draw(bg, 0f, 0f, HelicopterGame.WIDTH.toFloat(), HelicopterGame.HEIGHT.toFloat())
-        sb.draw(helicopter.texture, helicopter.position.x, helicopter.position.y)
-        sb.draw(helicopter2.texture, helicopter2.position.x, helicopter2.position.y)
-        sb.draw(helicopter3.texture, helicopter3.position.x, helicopter3.position.y)
+        sb.draw(
+            helicopter.sprite.getKeyFrame(elapsedTime, true),
+            helicopter.position.x,
+            helicopter.position.y
+        )
+        sb.draw(
+            helicopter2.sprite.getKeyFrame(elapsedTime, true),
+            helicopter2.position.x,
+            helicopter2.position.y
+        )
+        sb.draw(
+            helicopter3.sprite.getKeyFrame(elapsedTime, true),
+            helicopter3.position.x,
+            helicopter3.position.y
+        )
         font.draw(sb, helicopter.getPosition(),10f,780f) // Task 2b it draws the first helicopter's coordinates
         sb.end()
     }

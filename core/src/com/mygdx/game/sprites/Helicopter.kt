@@ -1,24 +1,40 @@
 package com.mygdx.game.sprites
 
 import com.badlogic.gdx.graphics.Texture
-import com.badlogic.gdx.graphics.g2d.Sprite
+import com.badlogic.gdx.graphics.g2d.Animation
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
-import com.badlogic.gdx.math.Vector3
 import com.mygdx.game.HelicopterGame
 
 class Helicopter(x: Float, y: Float) {
 
-    val texture = Sprite(Texture("heli1.png"))
+
+
+    val sprite = Animation(
+        1f/10f,
+        Texture("heli4.png"),
+        Texture("heli3.png"),
+        Texture("heli2.png"),
+        Texture("heli1.png")
+    )
+
+    private val width = sprite.keyFrames[0].width.toFloat()
+    private val height = sprite.keyFrames[0].height.toFloat()
+
     val position = Vector2(x, y)
 
     private val velocity: Vector2
     private val speed = 2f
     private var moveFree = true
-    private var bounds = Rectangle(position.x, position.y, texture.width, texture.height)
+    private var bounds = Rectangle(
+        position.x,
+        position.y,
+        width,
+        height
+    )
 
     init {
-        velocity = Vector2(randomWithRange(-200, 220).toFloat(), randomWithRange(-200, 200).toFloat())
+       velocity = Vector2(randomWithRange(-200, 220).toFloat(), randomWithRange(-200, 200).toFloat())
         if (velocity.x > 0) flipSpriteOnX() // Helicopter starts in the correct direction
     }
 
@@ -26,12 +42,15 @@ class Helicopter(x: Float, y: Float) {
         return (Math.random() * max - min + 1).toInt() + min
     }
 
-    fun flipSpriteOnX() {texture.flip(true, false)}
+    private fun flipSpriteOnX() {
+        // NOTE: Must be fixed
+        //sprite.flip(false, true)
+    }
 
     fun update(dt: Float, obstacles: List<Helicopter>) {
-        val maxHeight = HelicopterGame.HEIGHT - texture.height
-        val maxWidth = HelicopterGame.WIDTH - texture.width
-        bounds = Rectangle(position.x, position.y, texture.width, texture.height)
+        val maxHeight = HelicopterGame.HEIGHT - height
+        val maxWidth = HelicopterGame.WIDTH - width
+        bounds = Rectangle(position.x, position.y, width, height)
 
         velocity.scl(dt)
 
@@ -39,8 +58,8 @@ class Helicopter(x: Float, y: Float) {
             val obstacleBounds = Rectangle(
                     i.position.x,
                     i.position.y,
-                    i.texture.width,
-                    i.texture.height
+                    i.width,
+                    i.height
                 )
             if (bounds.overlaps(obstacleBounds)) {
                 velocity.add(velocity.x * -speed, velocity.y * -speed)
@@ -85,8 +104,8 @@ class Helicopter(x: Float, y: Float) {
     fun control(touch: Vector2) {
         if (bounds.contains(touch)) moveFree = false
         if (!moveFree) {
-            position.x = touch.x - texture.width / 2
-            position.y = touch.y - texture.height / 2
+            position.x = touch.x - width / 2
+            position.y = touch.y - height / 2
         }
     }
 

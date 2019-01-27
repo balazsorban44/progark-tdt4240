@@ -19,9 +19,10 @@ class HelicopterGame : ApplicationAdapter() {
     }
 
     override fun render() {
+        val dt = Gdx.graphics.deltaTime
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
-        gsm!!.update(Gdx.graphics.deltaTime)
-        gsm!!.render(batch!!)
+        gsm!!.update(dt)
+        gsm!!.render(batch!!, dt)
     }
 
     override fun dispose() {batch!!.dispose()}

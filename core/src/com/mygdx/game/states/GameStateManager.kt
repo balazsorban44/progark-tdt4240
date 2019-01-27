@@ -17,5 +17,5 @@ class GameStateManager {
 
     fun update(dt: Float) {states.peek().update(dt)}
 
-    fun render(sb: SpriteBatch) {states.peek().render(sb)}
+    fun render(sb: SpriteBatch, dt: Float) {states.peek().render(sb, dt)}
 }

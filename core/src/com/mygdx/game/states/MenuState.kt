@@ -19,7 +19,7 @@ class MenuState(gsm: GameStateManager) : State(gsm) {
         handleInput()
     }
 
-    override fun render(sb: SpriteBatch) {
+    override fun render(sb: SpriteBatch, dt: Float) {
         sb.begin()
         sb.draw(background, 0f, 0f, HelicopterGame.WIDTH.toFloat(), HelicopterGame.HEIGHT.toFloat())
         sb.end()
