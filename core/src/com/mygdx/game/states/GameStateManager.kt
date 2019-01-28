@@ -11,11 +11,15 @@ class GameStateManager {
     fun push(state: State) {states.push(state)}
 
     fun set(state: State) {
-        states.pop()
-        states.push(state)
+        pop()
+        push(state)
     }
 
     fun update(dt: Float) {states.peek().update(dt)}
 
     fun render(sb: SpriteBatch, dt: Float) {states.peek().render(sb, dt)}
+
+    fun pop() {
+        states.pop()
+    }
 }

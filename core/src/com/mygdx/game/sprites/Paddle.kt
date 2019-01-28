@@ -3,7 +3,7 @@ package com.mygdx.game.sprites
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.graphics.Texture
-import com.mygdx.game.HelicopterGame
+import com.mygdx.game.Game
 
 class Paddle(height: Float, width: Float, posX: Float, posY: Float) {
     var size = 0f
@@ -16,7 +16,7 @@ class Paddle(height: Float, width: Float, posX: Float, posY: Float) {
     private val ball = Texture("ball.png")
 
     fun update(dt: Float) {
-        val maxHeight = HelicopterGame.HEIGHT - bounds.height
+        val maxHeight = Game.HEIGHT - bounds.height
         bounds = Rectangle(position.x, position.y, width, height)
 
 

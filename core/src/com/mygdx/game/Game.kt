@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.mygdx.game.states.GameStateManager
 import com.mygdx.game.states.MenuState
 
-class HelicopterGame : ApplicationAdapter() {
+class Game : ApplicationAdapter() {
 
     private var gsm: GameStateManager? = null
     private var batch: SpriteBatch? = null
@@ -31,6 +31,6 @@ class HelicopterGame : ApplicationAdapter() {
     companion object {
         const val WIDTH = 800
         const val HEIGHT = 480
-        const val TITLE = "Helicopter"
+        const val TITLE = "Pre-Exercise 1"
     }
 }

@@ -3,10 +3,10 @@ package com.mygdx.game.sprites
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.graphics.Texture
-import com.mygdx.game.HelicopterGame
+import com.mygdx.game.Game
 
 class Ball(size: Float, x: Float, y: Float) {
-    var size = size
+    private var size = size
     private var position = Vector2(x,y)
     private val INTERVAL: Int = 300
     private var xSpeed = 150f
@@ -14,10 +14,10 @@ class Ball(size: Float, x: Float, y: Float) {
     private var velocity = Vector2(xSpeed, randomYSpeed)
     private var bounds = Rectangle(position.x, position.y, size, size)
 
-    private val speed = 2f
+    var speed = 2f
     private val ball = Texture("ball.png")
-    val maxHeight = HelicopterGame.HEIGHT.toFloat()
-    val maxWidth = HelicopterGame.WIDTH.toFloat()
+    val maxHeight = Game.HEIGHT.toFloat()
+    val maxWidth = Game.WIDTH.toFloat()
     fun update(dt: Float) {
 
         bounds = Rectangle(position.x, position.y, size, size)
@@ -68,6 +68,7 @@ class Ball(size: Float, x: Float, y: Float) {
     fun reset() {
         position.set(maxWidth / 2, maxHeight / 2)
         randomYSpeed = (-INTERVAL..INTERVAL).shuffled().first().toFloat()
+        speed = 2f
     }
 }
 

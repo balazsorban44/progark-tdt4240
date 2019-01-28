@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Animation
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
-import com.mygdx.game.HelicopterGame
+import com.mygdx.game.Game
 
 class Helicopter(x: Float, y: Float) {
 
@@ -48,8 +48,8 @@ class Helicopter(x: Float, y: Float) {
     }
 
     fun update(dt: Float, obstacles: List<Helicopter>) {
-        val maxHeight = HelicopterGame.HEIGHT - height
-        val maxWidth = HelicopterGame.WIDTH - width
+        val maxHeight = Game.HEIGHT - height
+        val maxWidth = Game.WIDTH - width
         bounds = Rectangle(position.x, position.y, width, height)
 
         velocity.scl(dt)

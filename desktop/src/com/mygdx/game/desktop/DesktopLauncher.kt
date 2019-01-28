@@ -2,7 +2,7 @@ package com.mygdx.game.desktop
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration
-import com.mygdx.game.HelicopterGame
+import com.mygdx.game.Game
 
 object DesktopLauncher {
     @JvmStatic
@@ -10,11 +10,11 @@ object DesktopLauncher {
 
         val config = LwjglApplicationConfiguration()
 
-        config.width = HelicopterGame.WIDTH
-        config.height = HelicopterGame.HEIGHT
-        config.title = HelicopterGame.TITLE
+        config.width = Game.WIDTH
+        config.height = Game.HEIGHT
+        config.title = Game.TITLE
 
-        LwjglApplication(HelicopterGame(), config)
+        LwjglApplication(Game(), config)
 
     }
 }
