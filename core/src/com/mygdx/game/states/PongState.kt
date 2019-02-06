@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
+import com.badlogic.gdx.math.Vector2
 import com.mygdx.game.Game
 import com.mygdx.game.sprites.Ball
 import com.mygdx.game.sprites.Paddle
@@ -13,10 +14,6 @@ class PongState(gsm: GameStateManager) : State(gsm) {
     private var padding = 20f
     private var maxHeight = Game.HEIGHT.toFloat()
     private var maxWidth = Game.WIDTH.toFloat()
-
-    // Ball
-    private val ballSize = maxWidth / 100.toFloat()
-    private var ball = Ball(ballSize, maxWidth / 2, maxHeight / 2)
 
 
     private var paddleHeight = 100f
@@ -49,42 +46,38 @@ class PongState(gsm: GameStateManager) : State(gsm) {
 
     }
 
+
     override fun update(dt: Float) {
         handleInput()
-        ball.update(dt)
+        Ball.update(dt)
         paddleR.update(dt)
         paddleL.update(dt)
 
         // Reached left
-        if (ball.getPosition().x < 0) {
-            ball.reset()
+        if (Ball.position.x < 0) {
+            Ball.reset()
             rScore ++
         }
 
         // Reached right
-        if (ball.getPosition().x > maxWidth) {
-            ball.reset()
+        if (Ball.position.x > maxWidth) {
+            Ball.reset()
             lScore ++
         }
 
-        if(paddleR.collides(ball.getBounds())) {
-            ball.hit(true)
-            ball.speed += 0.0001f
-        }
-        if(paddleL.collides(ball.getBounds())) {
-            ball.hit(false)
-            ball.speed += 0.0001f
-        }
+        if(paddleR.collides(Ball.bounds)) Ball.hit(true)
+
+        if(paddleL.collides(Ball.bounds)) Ball.hit(false)
     }
 
 
     override fun render(sb: SpriteBatch, dt: Float) {
-        val posBall = ball.getPosition()
+        val posBall = Ball.position
         val posPaddleR = paddleR.getPosition()
         val posPaddleL = paddleL.getPosition()
 
         sb.begin()
-        sb.draw(ball.getBall(), posBall.x, posBall.y, ballSize, ballSize)
+        sb.draw(Ball.ball, posBall.x, posBall.y, Ball.size, Ball.size)
         sb.draw(paddleR.getPaddle(), posPaddleR.x, posPaddleR.y, paddleWidth, paddleHeight)
         sb.draw(paddleL.getPaddle(), posPaddleL.x, posPaddleL.y, paddleWidth, paddleHeight)
         font.draw(sb, getScores(),maxWidth / 2 - padding, maxHeight - padding)

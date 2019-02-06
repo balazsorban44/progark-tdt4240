@@ -19,7 +19,5 @@ class GameStateManager {
 
     fun render(sb: SpriteBatch, dt: Float) {states.peek().render(sb, dt)}
 
-    fun pop() {
-        states.pop()
-    }
+    private fun pop() { states.pop() }
 }
